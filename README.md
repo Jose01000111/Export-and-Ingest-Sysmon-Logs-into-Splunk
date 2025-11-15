@@ -13,10 +13,6 @@ In this lab, I captured **Windows events via Sysmon** and **network events via S
 #  Install Sysmon 🖥️
 ## I downloaded **Sysmon** and a recommended configuration, installed it, and verified that the service was running. Windows event logging was now actively capturing process creation, network connections, and more.
 
-<img width="519" height="271" alt="ZJn1h2a" src="https://github.com/user-attachments/assets/919c9182-8d03-46d7-a02e-868874613425" />
-
----
-
 <img width="857" height="467" alt="SzN65Sv" src="https://github.com/user-attachments/assets/d6b07bd9-6bdf-4108-bfab-39b4efedc3d2" />
 
 >- Sysmon — Windows event monitoring
@@ -55,22 +51,29 @@ I set up Suricata logging so that network events would be written to a folder I 
 #  Copy Suricata Logs into Splunk Docker 📥
 I copied the Suricata logs into the Splunk container to make them available for ingestion.
 
+<img width="603" height="67" alt="gc2AC3Y" src="https://github.com/user-attachments/assets/b1b4af6e-8765-4bd1-9f7f-2a37968fccf1" />
 
+---
 
->- docker cp — move logs into container
+<img width="826" height="324" alt="Hc93M4X" src="https://github.com/user-attachments/assets/9e678c15-4259-4d23-a4ec-b0e1e958d936" />
+
+>- docker cp — move logs into container (Didnt capture)
 >- /tmp/SuricataLogs — folder for monitoring in Splunk
 
 #  Export Sysmon Logs 📊
 I exported **Sysmon event logs** so that host activity could be analyzed in Splunk.
+
+<img width="775" height="91" alt="E80TcNe" src="https://github.com/user-attachments/assets/d2df00e7-1793-476c-b8aa-6a6d2d19e1bd" />
+
+---
+
+<img width="565" height="228" alt="698oHmr" src="https://github.com/user-attachments/assets/89264db7-f58f-41fe-b275-847759ee3748" />
+
+
 >- wevtutil — Windows event export tool
 >- C:\SysmonLogs — folder for exported logs
 >- docker cp — move logs into Splunk container
 
-#  Add Data to Splunk 📈
-I added both **network and host logs** to Splunk so I could search and analyze them.
->- Suricata logs — source type `suricata`
->- Sysmon logs — source type `WinEventLog:Sysmon`
->- os_logs — index for all logs
 
 # Observations 💡
 >- Docker keeps Splunk isolated from my Windows host — easy to reset or rebuild
